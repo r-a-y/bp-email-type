@@ -122,5 +122,8 @@ class Ray_BP_Email_Type {
 
 		// set HTML to false to be extra-safe!
 		$phpmailer->IsHTML( false );
+
+		// Make sure we remove our hook.
+		remove_action( 'bp_phpmailer_init', array( $this, 'send_plaintext_only' ) );
 	}
 }
