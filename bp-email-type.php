@@ -89,6 +89,11 @@ class Ray_BP_Email_Type {
 			return $class;
 		}
 
+		// No need to do this for registration emails. Save some queries.
+		if ( 'core-user-registration' === $email_type || 'core-user-registration-with-blog' === $email_type ) {
+			return $class;
+		}
+
 		// Get the email recipient.
 		$recipient = new BP_Email_Recipient( $to );
 
