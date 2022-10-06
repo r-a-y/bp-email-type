@@ -94,11 +94,17 @@ class Ray_BP_Email_Type {
 			return $class;
 		}
 
+		// Account for arrays. Edge-case. Ugh.
+		if ( is_array( $to ) ) {
+			$to = array_shift( $to );
+			$to = key( $to );
+		}
+
 		// Get the email recipient.
 		$recipient = new BP_Email_Recipient( $to );
 
 		// Recipient is not a WP user, so bail.
-		if ( empty( $recipient->get_user()->ID ) ) {
+		if ( empty( $recipient->get_user() ) ) {
 			return $class;
 		}
 
